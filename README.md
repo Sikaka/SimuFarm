@@ -14,3 +14,6 @@ Breach: T
 Portal: Right Click
 
 Start/Stop Bot: Insert
+
+
+Place the Agent folder inside ExileCore/Plugins/Compiled to have it load. 
