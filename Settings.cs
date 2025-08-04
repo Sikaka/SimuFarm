@@ -22,10 +22,10 @@ namespace Agent
         public HotkeyNode CombatKey { get; set; } = (HotkeyNode)Keys.Q;
 
         [Menu("View Distance")]
-        public RangeNode<int> ViewDistance { get; set; } = new RangeNode<int>(50, 10, 500);
+        public RangeNode<int> ViewDistance { get; set; } = new RangeNode<int>(90, 10, 500);
 
         [Menu("Combat Distance")]
-        public RangeNode<int> CombatDistance { get; set; } = new RangeNode<int>(35, 10, 500);
+        public RangeNode<int> CombatDistance { get; set; } = new RangeNode<int>(15, 10, 500);
 
         [Menu("Map Resolution")]
         public RangeNode<int> ChunkResolution { get; set; } = new RangeNode<int>(10, 1, 100);
@@ -34,11 +34,11 @@ namespace Agent
         public RangeNode<int> ClampSize { get; set; } = new RangeNode<int>(400, 100, 1000);
 
         [Menu("Pathfinding Node Size")]
-        public RangeNode<int> NodeSize { get; set; } = new RangeNode<int>(25, 10, 100);
+        public RangeNode<int> NodeSize { get; set; } = new RangeNode<int>(20, 10, 100);
         [Menu("Store Inventory Count")]
         public RangeNode<int> StoreInventoryCount { get; set; } = new RangeNode<int>(30, 10, 60);
 
         [Menu("Wave End Delay")]
-        public RangeNode<int> WaveEndDelay { get; set; } = new RangeNode<int>(15, 1, 45);
+        public RangeNode<int> WaveEndDelay { get; set; } = new RangeNode<int>(5, 1, 45);
     }
 }
