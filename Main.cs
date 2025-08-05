@@ -1,7 +1,10 @@
-﻿using ExileCore;
+﻿using AStar;
+using ExileCore;
 using ExileCore.PoEMemory.Components;
 using ExileCore.PoEMemory.Elements.InventoryElements;
+using ExileCore.PoEMemory.MemoryObjects;
 using ExileCore.PoEMemory.Models;
+using ExileCore.Shared.Enums;
 using Microsoft.VisualBasic.Logging;
 using System.Diagnostics;
 namespace Agent
@@ -16,7 +19,7 @@ namespace Agent
             this.Name = "Agent";
             Controls.Settings = this.Settings;
             Controls.Controller = this.GameController;
-            farmer = new Sequences.SimulacrumFarmer(GameController, Graphics,Settings);
+            farmer = new Sequences.SimulacrumFarmer(GameController, Graphics, Settings);
             return base.Initialise();
         }
 
@@ -54,9 +57,9 @@ namespace Agent
             }
 
 
-            if (isActive && farmer != null)            
+            if (isActive && farmer != null)
                 farmer.Render();
-            
+
         }
 
     }

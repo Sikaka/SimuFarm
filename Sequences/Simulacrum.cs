@@ -56,6 +56,9 @@ namespace Agent.Sequences
         public string ErrorMessage { get; private set; } = "";
 
 
+
+        DateTime LastLinkUsedAt = DateTime.MinValue;
+
         bool hasBreached = false;
         Vector2 LastPosition = Vector2.Zero;
         DateTime LastMovedAt = DateTime.Now;
@@ -187,6 +190,8 @@ namespace Agent.Sequences
                 SetState(SimulacrumState.Looting);
             }
 
+            UseLinkSkill();
+
             switch (CurrentState)
             {
                 case SimulacrumState.FindingMonolith: HandleFindingMonolithState(); break;
@@ -207,6 +212,29 @@ namespace Agent.Sequences
                         SetState(SimulacrumState.LeavingMap); 
                     break;
             }
+        }
+
+
+        void UseLinkSkill()
+        {
+            if (!_settings.IsMercenarySupport.Value) return;
+            if (_gameController.Area.CurrentArea.IsHideout) return;
+            if (_gameController.Player.IsDead) return;
+            if (LastLinkUsedAt.AddSeconds(_settings.MercLinkFrequency.Value) > DateTime.Now) return;
+
+
+            var merc = _gameController.EntityListWrapper.OnlyValidEntities.FirstOrDefault(I =>
+                I.Type == EntityType.Monster &&
+                !I.IsHostile &&
+                I.IsAlive &&
+                !I.IsDead &&
+                I.IsTargetable);
+
+            if (merc == null) return;
+
+            Controls.UseKeyAtGridPos(merc.GridPosNum, Keys.T);
+            SetActionDelay(750);
+            LastLinkUsedAt = DateTime.Now;
         }
 
         private void CreateNewPath(Vector2 destination)
@@ -522,7 +550,7 @@ namespace Agent.Sequences
                 return;
             }
 
-            if (DateTime.Now > waveStartedAt.AddSeconds(40) && !hasBreached)
+            if (DateTime.Now > waveStartedAt.AddSeconds(40) && !hasBreached && !_settings.IsMercenarySupport.Value)
             {
                 Controls.UseKey(Keys.T);
                 hasBreached = true;

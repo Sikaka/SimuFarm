@@ -40,5 +40,11 @@ namespace Agent
 
         [Menu("Wave End Delay")]
         public RangeNode<int> WaveEndDelay { get; set; } = new RangeNode<int>(5, 1, 45);
+
+        [Menu("Support Mercenary (Uses T Key)")]
+        public ToggleNode IsMercenarySupport { get; set; } = new ToggleNode(false);
+
+        [Menu("Merc Link Frequency")]
+        public RangeNode<int> MercLinkFrequency { get; set; } = new RangeNode<int>(5, 1, 45);
     }
 }
